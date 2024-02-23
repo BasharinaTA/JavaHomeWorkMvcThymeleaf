@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Профессии</title>
+    <link rel="icon" href="/img/profession.ico">
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="modal">
+        <form th:object="${profession}" class="form" method="post" th:if="${profession.id == null}"
+              action="/admin/profession">
+            <input type="text" placeholder="Название" class="inputText" th:field="*{name}">
+            <input type="text" placeholder="Заметка" class="inputText" th:field="*{note}">
+            <input type="submit" value="Добавить" class="inputSubmit">
+        </form>
+
+        <form th:object="${profession}" class="form" method="post" th:unless="${profession.id == null}"
+             th:action="@{'/admin/profession/' + ${profession.id}}">
+            <input type="text" placeholder="Название" class="inputText" th:field="*{name}">
+            <input type="text" placeholder="Заметка" class="inputText" th:field="*{note}">
+            <input type="submit" value="Редактировать" class="inputSubmit">
+        </form>
+
+        <th:block th:unless="${professions.isEmpty()}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Заметка</th>
+                    <th colspan="2"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prof : ${professions}">
+                    <td>[[${prof.name}]]</td>
+                    <td>[[${prof.note}]]</td>
+                    <td><a th:href="@{'/admin/profession/edit/'+ ${prof.id}}" class="a-button"><img  src="/img/edit.png" alt="edit"></a></td>
+                    <td><a th:href="@{'/admin/profession/delete/'+ ${prof.id}}" class="a-button"><img src="/img/delete.png" alt="delete"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>
