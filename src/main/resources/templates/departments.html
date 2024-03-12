@@ -9,7 +9,8 @@
 <body>
 <div class="container">
     <div class="modal">
-        <form th:object="${department}" class="form" method="post" th:if="${department.id == null}"
+        <form th:if="${department.id == null}" th:object="${department}"
+              class="form" method="post"
               action="/admin/department">
             <input type="text" placeholder="Название" class="inputText" th:field="*{name}">
             <input type="text" placeholder="id родительского отдела" name="parentId" class="inputText">
@@ -17,16 +18,19 @@
             <input type="submit" value="Добавить" class="inputSubmit">
         </form>
 
-        <form th:object="${department}" class="form" method="post" th:unless="${department.id == null}"
+        <form th:unless="${department.id == null}" th:object="${department}"
+              class="form" method="post"
               th:action="@{'/admin/department/' + ${department.id}}">
             <input type="text" placeholder="Название" class="inputText" th:field="*{name}">
-            <input type="text" placeholder="id родительского отдела" name="parentId" class="inputText" th:if="${department.parentDept == null}">
-            <input type="text" placeholder="id родительского отдела" name="parentId" class="inputText" th:unless="${department.parentDept == null}" th:value="${department.parentDept.id}">
+            <input th:if="${department.parentDept == null}" type="text" placeholder="id родительского отдела"
+                   name="parentId" class="inputText">
+            <input th:unless="${department.parentDept == null}" type="text" placeholder="id родительского отдела"
+                   name="parentId" class="inputText" th:value="${department.parentDept.id}">
             <input type="text" placeholder="Заметка" class="inputText" th:field="*{note}">
             <input type="submit" value="Редактировать" class="inputSubmit">
         </form>
 
-        <th:block th:unless="${departments.isEmpty()}">
+        <th:block th:if="${!departments.isEmpty()}">
             <table class="table">
                 <thead>
                 <tr>

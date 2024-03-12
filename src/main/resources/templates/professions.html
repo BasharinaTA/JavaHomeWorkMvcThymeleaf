@@ -9,21 +9,23 @@
 <body>
 <div class="container">
     <div class="modal">
-        <form th:object="${profession}" class="form" method="post" th:if="${profession.id == null}"
+        <form th:if="${profession.id == null}" th:object="${profession}"
+              class="form" method="post"
               action="/admin/profession">
             <input type="text" placeholder="Название" class="inputText" th:field="*{name}">
             <input type="text" placeholder="Заметка" class="inputText" th:field="*{note}">
             <input type="submit" value="Добавить" class="inputSubmit">
         </form>
 
-        <form th:object="${profession}" class="form" method="post" th:unless="${profession.id == null}"
-             th:action="@{'/admin/profession/' + ${profession.id}}">
+        <form th:unless="${profession.id == null}" th:object="${profession}"
+              class="form" method="post"
+              th:action="@{'/admin/profession/' + ${profession.id}}">
             <input type="text" placeholder="Название" class="inputText" th:field="*{name}">
             <input type="text" placeholder="Заметка" class="inputText" th:field="*{note}">
             <input type="submit" value="Редактировать" class="inputSubmit">
         </form>
 
-        <th:block th:unless="${professions.isEmpty()}">
+        <th:block th:if="${!professions.isEmpty()}">
             <table class="table">
                 <thead>
                 <tr>
