@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="deptsTableLayout(departments)" th:if="${!departments.isEmpty()}">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>^ отдел</th>
+            <th>Заметка</th>
+            <th colspan="2"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="department : ${departments}">
+            <td>[[${department.name}]]</td>
+            <td th:if="${department.parentDept == null}"></td>
+            <td th:unless="${department.parentDept == null}">[[${department.parentDept.name}]]</td>
+            <td>[[${department.note}]]</td>
+            <td>
+                <form method="post" th:action="@{'/admin/departments/edit/' + ${department.id}}" class="form">
+                    <input type="submit" value="" class="input-button" id="edit">
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{'/admin/departments/delete/' + ${department.id}}" class="form">
+                    <input type="submit" value="" class="input-button" id="delete">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</th:block>
+</body>
+</html>

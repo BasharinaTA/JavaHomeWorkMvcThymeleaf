@@ -1,6 +1,6 @@
 package com.homework_mvc_thymeleaf.controllers;
 
-import com.homework_mvc_thymeleaf.model.Profession;
+import com.homework_mvc_thymeleaf.model.entities.Profession;
 import com.homework_mvc_thymeleaf.services.profession.ProfessionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -12,39 +12,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/admin/profession")
+@RequestMapping("/admin/professions")
 public class ProfessionController {
     private ProfessionService professionService;
 
     @GetMapping
     public String professions(Model model) {
         model.addAttribute("profession", new Profession());
-        model.addAttribute("professions", professionService.getAll());
-        return "professions";
+        model.addAttribute("professions", professionService.getAllOrderById());
+        return "pages/professions";
     }
 
-    @PostMapping
+    @PostMapping("/")
     public String add(Profession profession) {
         professionService.save(profession);
-        return "redirect:/admin/profession";
+        return "redirect:/admin/professions";
     }
 
-    @GetMapping("/edit/{id}")
+    @PostMapping("/edit/{id}")
     public String getEditPage(Model model, @PathVariable Integer id) {
         model.addAttribute("profession", professionService.get(id));
-        model.addAttribute("professions", professionService.getAll());
-        return "professions";
+        model.addAttribute("professions", professionService.getAllOrderById());
+        return "pages/professions";
     }
 
     @PostMapping("/{id}")
     public String update(Profession profession) {
-        professionService.update(profession.getId(), profession.getName(), profession.getNote());
-        return "redirect:/admin/profession";
+        professionService.update(profession);
+        return "redirect:/admin/professions";
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
         professionService.delete(id);
-        return "redirect:/admin/profession";
+        return "redirect:/admin/professions";
     }
 }

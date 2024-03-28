@@ -1,6 +1,6 @@
 package com.homework_mvc_thymeleaf.services.department;
 
-import com.homework_mvc_thymeleaf.model.Department;
+import com.homework_mvc_thymeleaf.model.entities.Department;
 import com.homework_mvc_thymeleaf.repository.DepartmentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +19,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public List<Department> getAllOrderById() {
+        return departmentRepository.findAllByOrderById();
+    }
+
+    @Override
     public Department get(Integer id) {
         return departmentRepository.findById(id).orElse(null);
     }
@@ -29,18 +34,18 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void update(Integer id, String name, String note, Integer parentId) {
-        Optional<Department> departmentOption = departmentRepository.findById(id);
+    public void update(Department department, Integer parentId) {
+        Optional<Department> departmentOption = departmentRepository.findById(department.getId());
         if (departmentOption.isPresent()) {
-            Department department = departmentOption.get();
+            Department departmentToUpdate = departmentOption.get();
             if (parentId != null) {
-                department.setParentDept(departmentRepository.findById(parentId).orElse(null));
+                departmentToUpdate.setParentDept(departmentRepository.findById(parentId).orElse(null));
             } else {
-                department.setParentDept(null);
+                departmentToUpdate.setParentDept(null);
             }
-            department.setName(name);
-            department.setNote(note);
-           departmentRepository.save(department);
+            departmentToUpdate.setName(department.getName());
+            departmentToUpdate.setNote(department.getNote());
+            departmentRepository.save(departmentToUpdate);
         }
     }
 

@@ -1,11 +1,14 @@
-package com.homework_mvc_thymeleaf.model;
+package com.homework_mvc_thymeleaf.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(name="employees")
 public class Employee {
@@ -19,4 +22,12 @@ public class Employee {
 
     @Column(name="note")
     private String note;
+
+    @ManyToOne
+    @JoinColumn(name="department_id")
+    private Department department;
+
+    @ManyToOne
+    @JoinColumn(name="profession_id")
+    private Profession profession;
 }

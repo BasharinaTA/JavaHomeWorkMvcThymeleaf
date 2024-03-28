@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="emplsFormLayout(employee, departments, professions)">
+    <form th:object="${employee}"
+          class="form"
+          method="post"
+          th:action="@{${employee.id == null ? '/admin/employees/' : '/admin/employees/' + employee.id}}">
+        <input type="text" placeholder="ФИО" class="inputText" th:field="*{fio}">
+        <select class="inputText" name="deptId">
+            <th:block th:each="department : ${departments}">
+                <option th:if="${employee.deptId == department.id}" th:value="${department.id}" selected>
+                    [[${department.name}]]
+                </option>
+                <option th:unless="${employee.deptId == department.id}" th:value="${department.id}">
+                    [[${department.name}]]
+                </option>
+            </th:block>
+        </select>
+        <select class="inputText" name="profId">
+            <th:block th:each="profession : ${professions}">
+                <option th:if="${employee.profId == profession.id}" th:value="${profession.id}" selected>
+                    [[${profession.name}]]
+                </option>
+                <option th:unless="${employee.profId == profession.id}" th:value="${profession.id}">
+                    [[${profession.name}]]
+                </option>
+            </th:block>
+        </select>
+        <input type="text" placeholder="Заметка" class="inputText" th:field="*{note}">
+        <input th:value="${employee.id == null ? 'Добавить' : 'Редактировать'}" type="submit" class="inputSubmit">
+    </form>
+</th:block>
+</body>
+</html>

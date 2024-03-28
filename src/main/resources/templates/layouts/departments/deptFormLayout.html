@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="deptFormLayout(department, departments)">
+    <form th:object="${department}"
+          class="form" method="post"
+          th:action="@{${department.id == null ? '/admin/departments' : '/admin/departments/' + department.id}}">
+        <input type="text" placeholder="Название" class="inputText" th:field="*{name}">
+        <select class="inputText" name="parentId">
+            <option value="" selected></option>
+            <th:block th:if="${department.id == null}" th:each="dept : ${departments}">
+                <option th:value="${dept.id}">[[${dept.name}]]</option>
+            </th:block>
+            <th:block th:unless="${department.id == null}" th:each="dept : ${departments}">
+                <option th:if="${dept == department.parentDept}" th:value="${dept.id}" selected>[[${dept.name}]]
+                </option>
+                <option th:unless="${dept == department.parentDept}" th:value="${dept.id}">[[${dept.name}]]</option>
+            </th:block>
+        </select>
+        <input type="text" placeholder="Заметка" class="inputText" th:field="*{note}">
+        <input th:value="${department.id == null ? 'Добавить' : 'Редактировать'}" type="submit" class="inputSubmit">
+    </form>
+</th:block>
+</body>
+</html>

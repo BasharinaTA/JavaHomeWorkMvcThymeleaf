@@ -1,8 +1,12 @@
 package com.homework_mvc_thymeleaf.services.profession;
 
-import com.homework_mvc_thymeleaf.model.Profession;
+import com.homework_mvc_thymeleaf.model.entities.Profession;
 import com.homework_mvc_thymeleaf.services.DataService;
 
+import java.util.List;
+
 public interface ProfessionService extends DataService<Profession> {
-    void update(Integer id, String name, String note);
+    List<Profession> getAllOrderById();
+
+    void update(Profession profession);
 }

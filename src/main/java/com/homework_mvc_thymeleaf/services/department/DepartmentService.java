@@ -1,8 +1,12 @@
 package com.homework_mvc_thymeleaf.services.department;
 
-import com.homework_mvc_thymeleaf.model.Department;
+import com.homework_mvc_thymeleaf.model.entities.Department;
 import com.homework_mvc_thymeleaf.services.DataService;
 
+import java.util.List;
+
 public interface DepartmentService extends DataService<Department> {
-    void update(Integer id, String name, String note, Integer parentId);
+    List<Department> getAllOrderById();
+
+    void update(Department department, Integer parentId);
 }

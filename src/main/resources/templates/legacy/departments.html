@@ -48,8 +48,11 @@
                     <td th:if="${dept.parentDept == null}"></td>
                     <td th:unless="${dept.parentDept == null}">[[${dept.parentDept.name}]]</td>
                     <td>[[${dept.note}]]</td>
-                    <td><a th:href="@{'/admin/department/edit/' + ${dept.id}}" class="a-button"><img src="/img/edit.png" alt="edit"></a></td>
-                    <td><a th:href="@{'/admin/department/delete/' + ${dept.id}}" class="a-button"><img src="/img/delete.png" alt="delete"></a></td>
+                    <td><a th:href="@{'/admin/department/edit/' + ${dept.id}}" class="a-button"><img src="/img/edit.png"
+                                                                                                     alt="edit"></a>
+                    </td>
+                    <td><a th:href="@{'/admin/department/delete/' + ${dept.id}}" class="a-button"><img
+                            src="/img/delete.png" alt="delete"></a></td>
                 </tr>
                 </tbody>
             </table>

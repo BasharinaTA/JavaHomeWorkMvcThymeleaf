@@ -1,4 +1,4 @@
-package com.homework_mvc_thymeleaf.model;
+package com.homework_mvc_thymeleaf.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -23,7 +24,6 @@ public class Profession {
     @Column(name="note")
     private String note;
 
-    @OneToMany
-    @JoinColumn(name="profession_id")
+    @OneToMany(mappedBy="profession")
     private Set<Employee> emps;
 }

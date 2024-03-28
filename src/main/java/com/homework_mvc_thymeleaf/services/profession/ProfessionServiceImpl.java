@@ -1,6 +1,6 @@
 package com.homework_mvc_thymeleaf.services.profession;
 
-import com.homework_mvc_thymeleaf.model.Profession;
+import com.homework_mvc_thymeleaf.model.entities.Profession;
 import com.homework_mvc_thymeleaf.repository.ProfessionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +19,11 @@ public class ProfessionServiceImpl implements ProfessionService {
     }
 
     @Override
+    public List<Profession> getAllOrderById() {
+        return professionRepository.findAllByOrderById();
+    }
+
+    @Override
     public Profession get(Integer id) {
         return professionRepository.findById(id).orElse(null);
     }
@@ -29,17 +34,18 @@ public class ProfessionServiceImpl implements ProfessionService {
     }
 
     @Override
-    public void update(Integer id, String name, String note) {
-        Optional<Profession> professionOptional = professionRepository.findById(id);
+    public void update(Profession profession) {
+        Optional<Profession> professionOptional = professionRepository.findById(profession.getId());
         if (professionOptional.isPresent()) {
-            Profession profession = professionOptional.get();
-            profession.setName(name);
-            profession.setNote(note);
-            professionRepository.save(profession);
+            Profession professionToUpdate = professionOptional.get();
+            professionToUpdate.setName(profession.getName());
+            professionToUpdate.setNote(profession.getNote());
+            professionRepository.save(professionToUpdate);
         }
     }
+
     @Override
     public void delete(Integer id) {
-         professionRepository.deleteById(id);
+        professionRepository.deleteById(id);
     }
 }

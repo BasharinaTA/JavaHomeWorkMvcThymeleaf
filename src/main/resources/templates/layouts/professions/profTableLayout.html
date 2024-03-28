@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="profTableLayout(professions)" th:if="${!professions.isEmpty()}">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Заметка</th>
+            <th colspan="2"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="profession : ${professions}">
+            <td>[[${profession.name}]]</td>
+            <td>[[${profession.note}]]</td>
+            <td>
+                <form method="post" th:action="@{'/admin/professions/edit/' + ${profession.id}}" class="form">
+                    <input type="submit" value="" class="input-button" id="edit">
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{'/admin/professions/delete/' + ${profession.id}}" class="form">
+                    <input type="submit" value="" class="input-button" id="delete">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+</body>
+</html>

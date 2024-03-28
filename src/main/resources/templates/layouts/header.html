@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="headerLayout">
+    <div class="header">
+        <div>
+            <a href="/admin/employees">Сотрудники</a>
+            <a href="/admin/departments">Департаменты</a>
+            <a href="/admin/professions">Профессии</a>
+        </div>
+        <form method="get" action="/service/generate">
+            <input type="submit" value="Сгенерировать базу">
+        </form>
+    </div>
+</th:block>
+</body>
+</html>

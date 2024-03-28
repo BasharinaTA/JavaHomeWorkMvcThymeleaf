@@ -18,7 +18,24 @@
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.form {
+.header {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    margin: 20px;
+    border-bottom: 1px solid gray;
+    padding-bottom: 20px;
+}
+
+.header a {
+    border: 1px solid gray;
+    border-radius: 2px;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.form, .a-button {
     width: 90%;
     margin: auto;
     display: flex;
@@ -35,18 +52,6 @@
     outline: none;
     font-size: medium;
     font-family: Arial, sans-serif;
-}
-
-img {
-    width: 20px;
-    height: 20px;
-}
-
-.a-button {
-    display: flex;
-    justify-content: center;
-    border: 1px gray solid;
-    border-radius: 2px;
 }
 
 .inputSubmit {
@@ -70,4 +75,23 @@ td, th {
     border-style: solid;
     border-width: 1px;
     text-align: center;
+}
+
+.input-button {
+    width: 25px;
+    height: 25px;
+    border: 1px gray solid;
+    border-radius: 2px;
+    background-color: initial;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+#edit {
+    background-image:url(../img/edit.png);
+}
+
+#delete {
+    background-image:url(../img/delete.png);
 }

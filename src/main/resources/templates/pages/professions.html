@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Профессии</title>
+    <link rel="icon" href="/img/profession.ico">
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="modal">
+        <th:block th:insert="~{layouts/header.html::headerLayout}"></th:block>
+        <th:block th:insert="~{layouts/professions/profFormLayout.html::profFormLayout(${profession})}"></th:block>
+        <th:block th:insert="~{layouts/professions/profTableLayout.html::profTableLayout(${professions})}"></th:block>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<th:block th:fragment="emplsTableLayout(employees, departments, professions)" th:if="${!employees.isEmpty()}">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Отдел</th>
+            <th>Профессия</th>
+            <th>Заметка</th>
+            <th colspan="2"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${employees}">
+            <td>[[${employee.fio}]]</td>
+            <th:block th:each="department : ${departments}">
+                <td th:if="${department.id == employee.deptId}">[[${department.name}]]</td>
+            </th:block>
+            <th:block th:each="profession : ${professions}">
+                <td th:if="${profession.id == employee.profId}">[[${profession.name}]]</td>
+            </th:block>
+            <td>[[${employee.note}]]</td>
+            <td>
+                <form method="post" th:action="@{'/admin/employees/edit/' + ${employee.id}}" class="form">
+                    <input type="submit" value="" class="input-button" id="edit">
+                </form>
+            </td>
+            <td>
+                <form method="post" th:action="@{'/admin/employees/delete/' + ${employee.id}}" class="form">
+                    <input type="submit" value="" class="input-button" id="delete">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+</body>
+</html>

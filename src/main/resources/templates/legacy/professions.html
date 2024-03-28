@@ -38,8 +38,10 @@
                 <tr th:each="prof : ${professions}">
                     <td>[[${prof.name}]]</td>
                     <td>[[${prof.note}]]</td>
-                    <td><a th:href="@{'/admin/profession/edit/'+ ${prof.id}}" class="a-button"><img  src="/img/edit.png" alt="edit"></a></td>
-                    <td><a th:href="@{'/admin/profession/delete/'+ ${prof.id}}" class="a-button"><img src="/img/delete.png" alt="delete"></a>
+                    <td><a th:href="@{'/admin/profession/edit/'+ ${prof.id}}" class="a-button"><img src="/img/edit.png"
+                                                                                                    alt="edit"></a></td>
+                    <td><a th:href="@{'/admin/profession/delete/'+ ${prof.id}}" class="a-button"><img
+                            src="/img/delete.png" alt="delete"></a>
                     </td>
                 </tr>
                 </tbody>

@@ -1,4 +1,4 @@
-package com.homework_mvc_thymeleaf.model;
+package com.homework_mvc_thymeleaf.model.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,11 +31,6 @@ public class Department {
     @OneToMany(mappedBy="parentDept")
     private Set<Department> subDepartment;
 
-//    @OneToMany
-//    @JoinColumn(name="parent_id")
-//    private Set<Department> subDepartment;
-
-    @OneToMany
-    @JoinColumn(name="department_id")
+    @OneToMany(mappedBy="department")
     private Set<Employee> emps;
 }
