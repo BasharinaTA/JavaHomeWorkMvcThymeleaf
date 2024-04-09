@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="modal">
+        <h3>Привет, [[${username}]]</h3>
+        <th:block th:insert="~{layouts/header.html::headerLayout}"></th:block>
+        <form method="post" action="/logout" class="form">
+            <input type="submit" value="Выйти" class="inputSubmit">
+        </form>
+    </div>
+</div>
+</body>
+</html>

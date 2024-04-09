@@ -95,3 +95,7 @@ td, th {
 #delete {
     background-image:url(../img/delete.png);
 }
+
+h3 {
+    margin: 20px;
+}

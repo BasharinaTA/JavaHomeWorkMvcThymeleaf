@@ -3,7 +3,7 @@ package com.homework_mvc_thymeleaf.services.employee;
 import com.homework_mvc_thymeleaf.exceptions.RecordNotFoundException;
 import com.homework_mvc_thymeleaf.model.entities.Employee;
 import com.homework_mvc_thymeleaf.repository.EmployeeRepository;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

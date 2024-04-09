@@ -1,6 +1,6 @@
 package com.homework_mvc_thymeleaf.model.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @Getter

@@ -7,6 +7,7 @@ import com.homework_mvc_thymeleaf.services.department.DepartmentService;
 import com.homework_mvc_thymeleaf.services.employee.EmployeeService;
 import com.homework_mvc_thymeleaf.services.profession.ProfessionService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class EmployeeController {
     private EmployeeConverter employeeConverter;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('EMPLOYEE_READ')")
     public String employees(Model model) {
         model.addAttribute("employee", new EmployeeDto());
         model.addAttribute("employees", employeeService.getAllOrderById()
@@ -33,6 +35,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/")
+    @PreAuthorize("hasAuthority('EMPLOYEE_WRITE')")
     public String add(EmployeeDto employeeDto,
                       @RequestParam(required = false) Integer deptId,
                       @RequestParam(required = false) Integer profId) {
@@ -42,6 +45,7 @@ public class EmployeeController {
 
 
     @PostMapping("/edit/{id}")
+    @PreAuthorize("hasAuthority('EMPLOYEE_WRITE')")
     public String getEditPage(Model model, @PathVariable Integer id) {
         model.addAttribute("employee", employeeConverter.toDto(employeeService.get(id)));
         model.addAttribute("employees", employeeService.getAllOrderById()
@@ -54,6 +58,7 @@ public class EmployeeController {
     }
 
     @PostMapping("{id}")
+    @PreAuthorize("hasAuthority('EMPLOYEE_WRITE')")
     public String update(EmployeeDto employeeDto,
                          @RequestParam(required = false) Integer deptId,
                          @RequestParam(required = false) Integer profId) {
@@ -63,6 +68,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('EMPLOYEE_WRITE')")
     public String delete(@PathVariable Integer id) {
         employeeService.delete(id);
         return "redirect:/admin/employees";
